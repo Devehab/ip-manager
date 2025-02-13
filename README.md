@@ -6,10 +6,17 @@ A powerful and intuitive Chrome extension designed to simplify IP address manage
 
 - 🔄 Real-time public IP address display
 - 🔔 Automatic notifications for IP changes
-- 📋 One-click IP copying
+- 📋 One-click IP and URL copying
 - 🕒 Automatic IP refresh every 5 minutes
-- 📊 IP change history tracking
-- 🔍 Port checking functionality
+- 📊 Advanced IP history management
+  - Search and filter functionality
+  - Time-based sorting
+  - Export to log file
+- 🔍 Enhanced port checking
+  - Local network testing
+  - Public IP testing
+  - Custom host support
+  - URL copying for ports
 - 🌐 Network connection testing
 - 💻 Clean, modern user interface
 
@@ -26,26 +33,27 @@ A powerful and intuitive Chrome extension designed to simplify IP address manage
 - Click the extension icon to view your current public IP address
 - The IP address is automatically refreshed every 5 minutes
 - Click the refresh button to manually update the IP
+- Copy any IP address with one click
 
-### Copying IP Address
-- Click the copy icon next to your IP address
-- The IP will be copied to your clipboard
-- A visual confirmation will appear
+### Port Checking
+1. Enter a port number (1-65535)
+2. Optionally enter a custom host (IP or domain)
+3. Click "Check" to test the port
+4. Results will show:
+   - Internal network status (localhost and 127.0.0.1)
+   - External network status (your public IP)
+   - Custom host status (if specified)
+5. Copy full URLs with one click
 
-### Checking Ports
-1. Enter a port number in the port checker input
-2. Click "Check" to test if the port is open
-3. Results will be displayed below the input
-
-### Testing Network Connection
-1. Click "Test Network Connection"
-2. The extension will check your internet connectivity
-3. Results will show whether you're online or offline
-
-### IP Change History
-- View the last 10 IP address changes
-- Each entry includes the IP and timestamp
-- History is automatically updated when your IP changes
+### IP History Management
+- View and search through IP address changes
+- Sort history by time (ascending/descending)
+- Export history to a log file
+- Copy any IP from history with one click
+- Each entry includes:
+  - IP address
+  - IP type (IPv4/IPv6)
+  - Timestamp
 
 ## Development
 

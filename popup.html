@@ -43,23 +43,124 @@
 
     <!-- Port Checker Section -->
     <div class="bg-white rounded-xl shadow-sm p-4 mb-4">
-      <h2 class="text-lg font-semibold text-gray-700 mb-3">Port Checker</h2>
-      <div class="flex gap-2 mb-3">
-        <div class="flex-1">
-          <input type="number" id="portInput" placeholder="Enter port number" 
-                 class="w-full px-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors">
+      <h2 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+        <i class="fas fa-network-wired mr-2"></i>
+        Port Checker
+      </h2>
+      <div class="flex flex-col gap-3">
+        <div class="flex flex-col sm:flex-row gap-2">
+          <div class="flex-1">
+            <label for="portInput" class="block text-sm font-medium text-gray-700 mb-1">Port Number</label>
+            <div class="relative flex items-center">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-hashtag text-gray-400"></i>
+              </div>
+              <input type="number" id="portInput" placeholder="1-65535" 
+                     class="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                     min="1" max="65535">
+            </div>
+          </div>
+          <div class="flex-1">
+            <label for="customHost" class="block text-sm font-medium text-gray-700 mb-1">Custom Host (Optional)</label>
+            <div class="relative flex items-center">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-globe text-gray-400"></i>
+              </div>
+              <input type="text" id="customHost" placeholder="IP or domain name" 
+                     class="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors">
+            </div>
+          </div>
+          <div class="sm:self-end">
+            <button id="checkPort" class="w-full sm:w-auto bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              <i class="fas fa-search"></i>
+              <span>Check</span>
+            </button>
+          </div>
         </div>
-        <button id="checkPort" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50">
-          Check
-        </button>
+
+        <!-- Loading State -->
+        <div id="portCheckLoading" class="hidden">
+          <div class="animate-pulse flex items-center justify-center py-4">
+            <div class="h-8 w-8">
+              <i class="fas fa-circle-notch fa-spin text-blue-500 text-2xl"></i>
+            </div>
+            <span class="ml-3 text-gray-600">Checking port status...</span>
+          </div>
+        </div>
+
+        <!-- Results -->
+        <div id="portResult" class="text-sm space-y-3 bg-gray-50 rounded-lg p-4">
+          <div id="localResults" class="hidden">
+            <h3 class="font-semibold text-gray-700 flex items-center mb-2">
+              <i class="fas fa-laptop-house mr-2"></i>
+              Internal Network
+            </h3>
+            <div class="pl-6 space-y-2">
+              <div id="localhostResult" class="flex items-center"></div>
+              <div id="localhost127Result" class="flex items-center"></div>
+            </div>
+          </div>
+          
+          <div id="publicResults" class="hidden">
+            <h3 class="font-semibold text-gray-700 flex items-center mb-2">
+              <i class="fas fa-globe mr-2"></i>
+              External Network
+            </h3>
+            <div class="pl-6">
+              <div id="publicIPResult" class="flex items-center"></div>
+            </div>
+          </div>
+          
+          <div id="customResults" class="hidden">
+            <h3 class="font-semibold text-gray-700 flex items-center mb-2">
+              <i class="fas fa-server mr-2"></i>
+              Custom Host
+            </h3>
+            <div class="pl-6">
+              <div id="customHostResult" class="flex items-center"></div>
+            </div>
+          </div>
+
+          <!-- No Results State -->
+          <div id="noResults" class="text-center py-4 text-gray-500">
+            Enter a port number to check its status
+          </div>
+        </div>
       </div>
-      <div id="portResult" class="text-sm rounded-lg"></div>
     </div>
 
     <!-- IP History Section -->
     <div class="bg-white rounded-xl shadow-sm p-4">
-      <h2 class="text-lg font-semibold text-gray-700 mb-3">IP Change History</h2>
-      <div id="ipHistory" class="max-h-48 overflow-y-auto">
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="text-lg font-semibold text-gray-700">IP Change History</h2>
+        <button id="exportHistory" class="text-blue-600 hover:text-blue-700 flex items-center gap-1 text-sm">
+          <i class="fas fa-download"></i>
+          <span>Export</span>
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-col sm:flex-row gap-2 mb-3">
+        <div class="flex-1">
+          <div class="relative flex items-center">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input type="text" id="ipFilter" placeholder="Filter by IP" 
+                   class="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors">
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button id="sortTime" class="flex items-center gap-1 px-3 py-2 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+            <i class="fas fa-clock"></i>
+            <span>Time</span>
+            <i id="sortIcon" class="fas fa-sort-down ml-1"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- History List -->
+      <div id="ipHistory" class="max-h-48 overflow-y-auto rounded-lg">
         <div class="text-gray-500 text-center py-4">No changes recorded yet</div>
       </div>
     </div>

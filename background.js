@@ -59,8 +59,8 @@ function addToHistory(ip, timestamp) {
     const history = result.ipHistory;
     history.unshift({ ip, timestamp });
     
-    // Keep only last 10 entries
-    if (history.length > 10) {
+    // Keep only last 100 entries
+    if (history.length > 100) {
       history.pop();
     }
     
