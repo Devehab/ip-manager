@@ -38,7 +38,7 @@ async function checkIPAddress() {
         // Add to history
         const timestamp = new Date().toLocaleString();
         addToHistory(newIP, timestamp);
-        
+        console.log('IP changed to:', newIP);
         // Show notification
         chrome.notifications.create({
           type: 'basic',

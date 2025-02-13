@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "IP Manager",
-  "version": "1.0",
+  "version": "2.0",
   "description": "A powerful tool for developers to manage and monitor IP addresses with real-time updates and network diagnostics",
   "permissions": [
     "notifications",
@@ -10,7 +10,7 @@
   ],
   "host_permissions": [
     "https://api.ipify.org/*",
-    "https://portchecker.io/*",
+    "https://www.cloudflare.com/*",
     "https://www.google.com/*"
   ],
   "action": {
